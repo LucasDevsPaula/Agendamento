@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: agendamento
+  datasource:
+    url: jdbc:postgresql://localhost:5432/agendamento
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  jwt:
+    expiration: ${JWT_EXPIRATION:9000000}
+    key: ${JWT_KEY:ZbySMQGWhP1dQz7NPQ=R59$m0H$aJgT&rYEVsAW-tO-R!oAoeQRntgvOvgoT-iadwFWdYsNerLY2jTh5zc_jS22xs9zex&#tslc#BwaMnnsTNPNLQnd07QF_4tniXkAQeJcnJ1qJi9ZqZnZq8QlPh-uwDKrMMQ116HvHnuCPttAy72Y9Uys7tyFJbC8y8JEklnzGOTFM2KDTIRaBnG_-9mS94CsQPTyf#fWf8QgCec#eG5-5BfGdp7Drzh$YzbUe5ONIHuLX--veZw98fOMOX!dkr5V-PZnbbAess=GxJ2IuIYz!Q5#TI23WcaS7hZH=x=sEMbJ!qpuLA&Jc-bP-Wukv}
