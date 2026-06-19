@@ -1,4 +1,4 @@
-package com.lucas.agendamento.dto;
+package com.lucas.agendamento.dto.autenticacao;
 
 import com.lucas.agendamento.enums.RoleTypeEnum;
 import jakarta.validation.constraints.NotBlank;

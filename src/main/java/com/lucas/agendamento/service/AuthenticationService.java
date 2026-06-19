@@ -9,7 +9,7 @@ import com.lucas.agendamento.database.repository.MedicoRepository;
 import com.lucas.agendamento.database.repository.PacienteRepository;
 import com.lucas.agendamento.database.repository.RolesRepossitory;
 import com.lucas.agendamento.database.repository.UserRepository;
-import com.lucas.agendamento.dto.*;
+import com.lucas.agendamento.dto.autenticacao.*;
 import com.lucas.agendamento.enums.RoleTypeEnum;
 import com.lucas.agendamento.exception.BadRequestException;
 import com.lucas.agendamento.exception.NotFoundException;

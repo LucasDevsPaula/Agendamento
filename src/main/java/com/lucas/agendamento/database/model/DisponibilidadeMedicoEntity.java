@@ -19,6 +19,7 @@ public class DisponibilidadeMedicoEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "dia_semana")
     private SemanaTypeEnum diaSemana;
 

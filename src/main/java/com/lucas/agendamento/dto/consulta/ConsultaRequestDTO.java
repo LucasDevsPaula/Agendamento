@@ -1,11 +1,10 @@
-package com.lucas.agendamento.dto.agendamento;
+package com.lucas.agendamento.dto.consulta;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -13,8 +12,8 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Builder
 @Validated
-public class AgendamentoRequestDTO {
+public class ConsultaRequestDTO {
     @NonNull private Integer medicoId;
-    @NotEmpty private LocalDateTime horaInicio;
+    @NotNull private LocalDateTime horaInicio;
     private String observacao;
 }

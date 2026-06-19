@@ -1,12 +1,10 @@
-package com.lucas.agendamento.dto.agendamento;
+package com.lucas.agendamento.dto.consulta;
 
 import com.lucas.agendamento.enums.StatusTypeEnum;
-import jakarta.validation.constraints.NotEmpty;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -14,11 +12,9 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @Builder
 @Validated
-public class AgendamentoResponseDTO {
-    private Integer id;
+public class ConsultaMedicoResponseDTO {
     private String nome;
     private String cpf;
-    private String nomeMedico;
     private String observacao;
     private LocalDateTime horarioInicio;
     private LocalDateTime horarioFim;

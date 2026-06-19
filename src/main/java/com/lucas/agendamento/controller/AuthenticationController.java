@@ -1,6 +1,6 @@
 package com.lucas.agendamento.controller;
 
-import com.lucas.agendamento.dto.*;
+import com.lucas.agendamento.dto.autenticacao.*;
 import com.lucas.agendamento.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

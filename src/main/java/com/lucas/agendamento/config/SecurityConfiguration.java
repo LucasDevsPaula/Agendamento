@@ -24,32 +24,46 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(ex -> ex.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-                        .accessDeniedHandler(((request,response,accessDeniedException) ->
-                                response.setStatus(HttpStatus.FORBIDDEN.value()))))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/v1/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST,  "/v1/auth/registerMedico", "/v1/auth/register", "/v1/auth/registerPaciente").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,  "/v1/auth/registerPaciente").hasRole("MEDICO")
-                        //adicionar um requestMatchers para o medico tambem registrar o paciente
-                        .anyRequest().authenticated())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http.csrf(AbstractHttpConfigurer::disable)
+        .sessionManagement(
+            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .exceptionHandling(
+            ex ->
+                ex.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                    .accessDeniedHandler(
+                        ((request, response, accessDeniedException) ->
+                            response.setStatus(HttpStatus.FORBIDDEN.value()))))
+        .authorizeHttpRequests(
+            auth ->
+                auth.requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**")
+                    .permitAll()
+                    .requestMatchers(HttpMethod.POST, "/v1/auth/login")
+                    .permitAll()
+                    .requestMatchers(
+                        HttpMethod.POST,
+                        "/v1/auth/registerMedico/**",
+                        "/v1/auth/register")
+                    .hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/v1/auth/registerPaciente/**", "/v1/medicos/**")
+                    .hasAnyRole("ADMIN", "MEDICO")
+                    .anyRequest()
+                    .authenticated())
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration){
-        return authenticationConfiguration.getAuthenticationManager();
-    }
+  @Bean
+  public AuthenticationManager authenticationManager(
+      AuthenticationConfiguration authenticationConfiguration) {
+    return authenticationConfiguration.getAuthenticationManager();
+  }
 }

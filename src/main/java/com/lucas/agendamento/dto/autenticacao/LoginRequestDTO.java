@@ -1,4 +1,4 @@
-package com.lucas.agendamento.dto;
+package com.lucas.agendamento.dto.autenticacao;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @NoArgsConstructor
 @Builder
 @Validated
-public class PacienteRequestDTO {
-    @NotEmpty private String telefone;
+public class LoginRequestDTO {
+  @NotEmpty private String email;
+  @NotEmpty private String senha;
 }
